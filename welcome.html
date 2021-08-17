@@ -23,21 +23,82 @@
 			overflow: hidden;
 			position: fixed;	
 			background-color: #12b188;
+			-webkit-user-select: none;
 		}
 		* {
 			margin: 0;
 			padding: 0;
 		}
-		#blcokMe{
-			z-index:777;
+		
+		.content{
+			display:flex;
+			text-align:center;
+			width:100%;
+			margin: 0% auto;
+			flex-direction: column;
+			height:100%;
+			background-color:#12b188;
 		}
+
+		.menu{
+			position:fixed;
+			width:100%;
+			bottom:0;
+			font-family: myFirstFont, "Microsoft JhengHei" ;
+			font-weight:bold;
+			font-size:14px;
+			background:white;
+			color:#737373;
+			box-shadow: rgb(0 0 0 / 30%) 0px 0px 3.6px 0px, rgb(0 0 0 / 18%) 0px 0px 0.9px 0px;
+			display:flex;
+			flex-direction:column;
+			align-items: center;
+			justify-content: center;
+			height:100px;
+			padding-bottom:20px;
+			z-index:9999;
+			
+		}
+		.icons{
+			width:100%;
+			display:flex;
+			flex-direction:row;
+			align-items: center;
+			justify-content: center;
+			height:40px;
+		}
+		
+		.words{
+			width:100%;
+			display:flex;
+			flex-direction:row;
+			align-items: center;
+			justify-content: center;
+			text-align:center;
+		}
+		.words > div , .icons > *{
+			flex: 1;
+		}
+		
+		.menu img{
+			width:25px;
+			height:25px;
+		}
+		.selected{
+			color:#51ae8a;
+		}
+		.ic-selected{
+			width:22px!important;
+			height:22px!important;
+		}
+		
 		.imgbox {
-			z-index:1;
-			height: 100%;
+			flex: 1;
+			width: 100%;
+			overflow-y: auto;		
 		}
 		.center-fit {
 			width: 100%;
-			max-height: 100vh;
 			margin: auto;
 		}
 		.text-z-index{
@@ -46,28 +107,24 @@
 		#todayDay{
 			font-size:18px;	
 			color:white;
-			position: absolute;
-			top:12%;
-			left:8.5%;			
+			position: relative;
+			top: 12.5%;
+			left: -20%;			
 			-webkit-font-smoothing: antialiased;
 			text-shadow: rgb(0 0 0 / 80%) 0px 1px 2px;
 			font-family: myFirstFont;
 		}
 		#yesterdayDay{
-			font-size:15px;	
-			color:#000404;
-			position: absolute;
-			top:76.3%;
-			left:13%;
-			background-color:#b4e2d7;
+			font-size: 10px;
+			color: #000404;
+			position: relative;
+			top: 76.5%;
+			left: 9%;
+			width: 33%;
+			background-color: #b4e2d7;
 			font-family: myFirstFont;
 			font-weight: 400;
 		}
-		@-webkit-keyframes run {
-			0% { left: 30%;}
-			50%{ left : 70%;}
-			100%{ left: 30%;}
-		}		
 	</style>
 </head>
 <script>
@@ -75,7 +132,6 @@ function preload(){
 	if (!(localStorage.hasOwnProperty('checkSt')) || (new Date().getTime()) - (JSON.parse(localStorage.getItem("checkSt"))[2]) > 86400000){
 		window.location.href = "index.html";
 	}
-
 
 	var d = new Date();		
 	var dyesterday = new Date();
@@ -117,24 +173,30 @@ function preload(){
 </script>
 
 <body onload="preload();">
-<div id="blcokMe">
-	<a href="scan.html">
+<div class="content">
 	<div class="imgbox">
-		<img id = "myImg" src="image/welcome.jpg" alt="welcome" class="center-fit">
-	</div>
-	</a>
-	<div class="text-z-index">
 		<p id="todayDay"></p>
-		<p onclick='window.location.href = "history.html";' id="yesterdayDay"></p>
-	</div>	
+		<p id="yesterdayDay"></p>
+		<img id = "myImg" src="image/new-wel.jpg" alt="welcome" class="center-fit" onclick='window.location.replace("scan.html");'>
+	</div>
+
+	
 </div>
-<script>
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('./sw.js')
-		.then(reg => console.log('SW registered!', reg))
-		.catch(err => console.log('Error!', err));
-	}
-</script>
+<div class="menu">
+		<div class="icons">
+			<img src="image/home-s.svg" class="ic-selected"/>
+			<img onclick='window.location.replace("history.html");' src="image/record.svg"/>
+			<img onclick='window.location.replace("message.html");' src="image/em.svg" />
+			<img onclick='window.location.replace("setting.html");'src="image/settings.svg"/>			
+		</div>
+		
+		<div class="words">
+			<div class="selected">主頁</div>
+			<div>出行記錄</div>
+			<div>收件箱</div>
+			<div>設定</div>
+		</div>
+	</div>
 </body>
 	
 </html>

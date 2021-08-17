@@ -30,6 +30,7 @@
 		position: fixed;
 		font-family: myFirstFont, "Microsoft JhengHei" ;
 		text-shadow: rgb(0 0 0 / 80%) 0px 1px 2px;
+		-webkit-user-select: none;
 		
 	}
 	.scanLabel {
@@ -182,7 +183,7 @@ function setCookie(cvalue){
 		
 		
 		
-		window.location.href = "confirm.html";
+		window.location.replace("confirm.html");
 	}
 }
 function checkCookie(){

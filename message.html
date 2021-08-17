@@ -163,6 +163,7 @@
 		justify-content: center;
 		height:100px;
 		padding-bottom:20px;
+		z-index:10;
 	}
 	.icons{
 		width:100%;
@@ -189,95 +190,43 @@
 		height:25px;
 	}
 	.selected{
-		color:#51ae8a;		
+		color:#51ae8a;
 	}
 	.ic-selected{
-		width:23px!important;
-		height:23px!important;
+		width:17px!important;
+		height:17px!important;
 	}
 	
-	
-</style>	
-
-</head>
-<script>
-function preload(){	
-	var myObj = JSON.parse(localStorage.getItem("myHistory"));
-	var historyTxt = "";
-	var timeNow = new Date();
-	
-	if(localStorage.hasOwnProperty('myHistory')){
-	var myObj = JSON.parse(localStorage.getItem("myHistory"));
-		for (var i = myObj.record.length - 1 ; i >= 0 ; i--){
-			if(new Date().getTime() - myObj.record[i].unixTime > 2678400000){ //2678400000 = 31 days
-				myObj.record.splice(0,1);
-			}
-		}
-		localStorage.setItem("myHistory", JSON.stringify(myObj));
-		myObj = JSON.parse(localStorage.getItem("myHistory"));
-	}
-
-	if(!localStorage.hasOwnProperty('myHistory') || myObj.record[0] == null){
-		historyTxt = "沒有記錄";
-		document.getElementById("norecord").innerHTML = historyTxt;
-	}else{		
-		for (var i = myObj.record.length - 1 ; i >= 0 ; i--){
-			if(i == 0){
-				historyTxt += "<div class='historyNoLine'><div class='historyPlace'>" + myObj.record[i].place + "</div><div class='historyTime' >" + myObj.record[i].checkInTime + " - " + myObj.record[i].checkOutTime + "</div></div>" ;
-			}else{
-				historyTxt += "<div class='historyLine'><div class='historyPlace'>" + myObj.record[i].place + "</div><div class='historyTime'>" + myObj.record[i].checkInTime + " - " + myObj.record[i].checkOutTime + "</div></div>" ;
-			}
-		}
-		document.getElementById("myRecord").innerHTML = historyTxt;	
-	}	
-}
-
-function delStorage() {
-  if(confirm("Do you want to delete all record?")){
-  	localStorage.removeItem("myHistory");
-	var noRecord = "沒有記錄";
-	var myDisplay = JSON.parse(localStorage.getItem("myDisplay"));	
-	myDisplay.display = false;
-	localStorage.setItem("myDisplay", JSON.stringify(myDisplay));
-	document.getElementById("norecord").innerHTML = noRecord;
-	document.getElementById("myRecord").innerHTML = "";
-  } else {
-    return '';
-  }
-}
-</script>
+</style>
 </head>
 	
-<body onload="preload();">
+<body>
 <div class="content">
 	<div class="pageHeader">
-		<div>出行記錄</div>
+		<div>收件箱</div>
 	</div>
-	<div id = "norecord"></div>	
+	<div id = "norecord">沒有記錄</div>	
 	<div class="myRecordContainer">
 		<div class="trytry">
 			<div id = "myRecord"></div>
 		</div>
 	</div>
 
-<div class="footerMessage">
-	<div>
-		<span class="footerSpan">
-			存放應用程式內的出行記錄在31天後會自動刪除<span onclick="delStorage()" >。</span></span>
-	</div>
+<div>
+
 </div>
 <div class="menu">
 		<div class="icons">
 			<img onclick='window.location.replace("welcome.html");' src="image/home.svg"/>
-			<img src="image/record-s.svg" class="ic-selected"/>
-			<img onclick='window.location.replace("message.html");' src="image/em.svg"/>
-			<img onclick='window.location.replace("setting.html");' src="image/settings.svg"/>			
+			<img onclick='window.location.replace("history.html");' src="image/record.svg"/>
+			<img src="image/em-s.svg" class="ic-selected"/>
+			<img onclick='window.location.replace("setting.html");'src="image/settings.svg"/>			
 		</div>
 		
 		<div class="words">
 			<div>主頁</div>
-			<div class="selected">出行記錄</div>
-			<div>收件箱</div>
+			<div>出行記錄</div>
+			<div class="selected">收件箱</div>
 			<div>設定</div>
 		</div>
 	</div>
