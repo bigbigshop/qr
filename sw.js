@@ -14,7 +14,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v18.4';
+const PRECACHE = 'precache-v4';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
@@ -22,6 +22,7 @@ const PRECACHE_URLS = [
  'index.html',
  './', // Alias for index.html
  'welcome.html',
+ 'message.html',
  'base64.js',
  'confirm.html',
  'font/Rubik-VariableFont_wght.ttf',
@@ -40,7 +41,16 @@ const PRECACHE_URLS = [
  'image/welcome.jpg',
  'instascan.js',
  'manifest.json',
- 'scan.html' 
+ 'scan.html',
+ 'image/new-wel.jpg',
+ 'image/em-s.svg',
+ 'image/home.svg',
+ 'image/home-s.svg',
+ 'image/record.svg',
+ 'image/record-s.svg',
+ 'image/settings.svg',
+ 'image/settings-s.svg',
+ 'image/em.svg'
 ];
 
 // The install handler takes care of precaching the resources we always need.
